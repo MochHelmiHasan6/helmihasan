@@ -1,106 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'konten.dart';
+import 'input.dart';
+import 'result.dart';
+import 'convert.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+// This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  TextEditingController etCelcius = new TextEditingController();
+
+  double nCelcius = 0;
+  double _kelvin = 0;
+  double _reamur = 0;
+  void _konversiSuhu() {
+    setState(() {
+      nCelcius = double.parse(etCelcius.text);
+      _kelvin = nCelcius + 273;
+      _reamur = (4 / 5) * nCelcius;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('MyApplication'),
-          backgroundColor: Colors.orange,
+          title: Text("Konverter Suhu"),
         ),
-        body: ListView(
-          children: <Widget>[
-            Row(
-              children: [
-                Container(
-                  child: CupertinoButton(
-                    child: Text(
-                      'BERITA TERBARU',
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                Container(
-                  child: CupertinoButton(
-                    child: Text(
-                      'PERTANDINGAN HARI INI',
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-            // Column(
-            //   children: [
-            //     Container(
-            //       child: Image(
-            //         image: NetworkImage(
-            //             'https://ichef.bbci.co.uk/news/800/cpsprodpb/D412/production/_112709245_costa2.png'),
-            //       ),
-            //     ),
-            //     Container(
-            //       alignment: Alignment.center,
-            //       height: 50,
-            //       child: Text(
-            //         'Costa Mendekat ke Palmeiras',
-            //       ),
-            //     ),
-            //     Container(
-            //       padding: EdgeInsets.only(left: 20),
-            //       alignment: Alignment.centerLeft,
-            //       color: Colors.blue[300],
-            //       height: 50,
-            //       child: Text(
-            //         'Transfer',
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            Stack(
-              children: <Widget>[
-                Container(
-                    color: Colors.purple[300],
-                    alignment: Alignment.bottomLeft,
-                    child: CupertinoButton(
-                        child: Text('Transfer',
-                            style:
-                                TextStyle(fontSize: 15, color: Colors.black)),
-                        onPressed: () {}),
-                    height: 300.0,
-                    width: 400.0,
-                    margin: EdgeInsets.all(8)),
-                Container(
-                  color: Colors.white,
-                  alignment: Alignment.bottomCenter,
-                  child: Text('Costa Mendekat ke Palmeiras',
-                      style: TextStyle(fontSize: 25, color: Colors.black)),
-                  height: 240.0,
-                  width: 400.0,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-                Container(
-                    child: Image(
-                      image: NetworkImage(
-                          'https://ichef.bbci.co.uk/news/800/cpsprodpb/D412/production/_112709245_costa2.png'),
-                    ),
-                    margin: EdgeInsets.all(10)),
-              ],
-            ),
-            Konten1(),
-            Konten2(),
-          ],
+        body: Container(
+          margin: EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Input(etCelcius: etCelcius),
+              Result(kelvin: _kelvin, reamur: _reamur),
+              Convert(konvertHandler: _konversiSuhu),
+            ],
+          ),
         ),
       ),
     );
