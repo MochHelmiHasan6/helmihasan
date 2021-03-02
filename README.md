@@ -22,4 +22,8 @@ samples, guidance on mobile development, and a full API reference.
 ![tugas2](images/tugas2.jpeg)
 
 ## Tugas 3
-![tugas2](images/tugas3.jpeg)
+![tugas3](images/tugas3.jpeg)
+
+## Tugas 4
+![tugas4](images/tugas4.jpeg)
+
