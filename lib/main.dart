@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/dropdown.dart';
 import 'input.dart';
 import 'result.dart';
 import 'convert.dart';
+import 'riwayat.dart';
+import 'dropdown.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,15 +20,35 @@ class _MyAppState extends State<MyApp> {
   TextEditingController etCelcius = new TextEditingController();
 
   double nCelcius = 0;
-  double _kelvin = 0;
-  double _reamur = 0;
+  String _newValue = "Kelvin";
+  double _result = 0;
+  List<String> listViewItem = [];
+
   void _konversiSuhu() {
     setState(() {
       nCelcius = double.parse(etCelcius.text);
-      _kelvin = nCelcius + 273;
-      _reamur = (4 / 5) * nCelcius;
+      if (_newValue == "Kelvin")
+        _result = nCelcius + 273;
+      else if (_newValue == "Reamur")
+        _result = (4 / 5) * nCelcius;
+      else
+        _result = (nCelcius * 9 / 5) + 32;
+      listViewItem.add("$_newValue : $_result");
     });
   }
+
+  void dropdownOnChanged(String changeValue) {
+    setState(() {
+      _newValue = changeValue;
+    });
+    _konversiSuhu();
+  }
+
+  var listString = [
+    "Kelvin",
+    "Reamur",
+    "Fahrenheit",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +68,25 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Input(etCelcius: etCelcius),
-              Result(kelvin: _kelvin, reamur: _reamur),
+              Dropdown(
+                listView: listString,
+                newValue: _newValue,
+                newMethod: dropdownOnChanged,
+              ),
+              Result(
+                result: _result,
+              ),
               Convert(konvertHandler: _konversiSuhu),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                child: Text(
+                  "Riwayat Konversi",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Expanded(
+                child: RiwayatKonversi(listViewItem: listViewItem),
+              ),
             ],
           ),
         ),

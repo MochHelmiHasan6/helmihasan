@@ -3,39 +3,28 @@ import 'package:flutter/material.dart';
 class Result extends StatelessWidget {
   const Result({
     Key key,
-    @required double kelvin,
-    @required double reamur,
-  })  : _kelvin = kelvin,
-        _reamor = reamur,
-        super(key: key);
+    @required this.result,
+  }) : super(key: key);
 
-  final double _kelvin;
-  final double _reamur;
+  final double result;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            Text("Suhu dalam Kelvin"),
-            Text(
-              _kelvin.toStringAsFixed(0),
-              style: TextStyle(height: 1.5, fontSize: 40),
-            )
-          ],
-        ),
-        Column(
-          children: <Widget>[
-            Text("Suhu dalam Reamur"),
-            Text(
-              _reamur.toStringAsFixed(0),
-              style: TextStyle(height: 1.5, fontSize: 40),
-            )
-          ],
-        ),
-      ],
+    return Container(
+      margin: EdgeInsets.only(top: 20, bottom: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Hasil",
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            result.toStringAsFixed(1),
+            style: TextStyle(fontSize: 30),
+          )
+        ],
+      ),
     );
   }
 }
