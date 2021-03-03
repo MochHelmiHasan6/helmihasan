@@ -21,8 +21,8 @@ samples, guidance on mobile development, and a full API reference.
 ## Tugas 2
 ![tugas2](images/tugas2.jpeg)
 
-<<<<<<< Updated upstream
-=======
 ## Tugas 3
-![tugas2](images/tugas3.jpeg)
->>>>>>> Stashed changes
+![tugas3](images/tugas3.jpeg)
+
+## Tugas 4
+![tugas4](images/tugas4.jpeg)
